@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Babblets</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway+Dots">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="home.css">
+  </head>
+  <body>
+    <div class="cover">
+      <div class="cover-container container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-push-3 text-xs-center">
+            <h1 class="display-1">Babblets</h1>
+            <p class="lead">Create a <em>babblet</em> – a free chat room for your inner circle</p>
+          </div>
+        </div>
+        <div class="row" id="form">
+          <div class="col-md-4 col-md-push-4 text-xs-center">
+            <fieldset class="form-group">
+              <input type="email" class="form-control form-control-lg" name="email[]" placeholder="Your email address">
+            </fieldset>
+            <fieldset class="form-group friends-email">
+              <input type="email" class="form-control form-control-lg" name="email[]" placeholder="Friend's email address">
+            </fieldset>
+            <fieldset class="form-group">
+              <button type="button" class="btn btn-info-outline btn-sm" id="add"><span class="fa fa-plus-circle"></span> Add more</button>
+            </fieldset>
+            <button type="submit" class="btn btn-lg btn-info-outline" id="create" disabled>Create a Chat</button>
+          </div>
+        </div>
+        <div class="row" id="success">
+          <div class="col-md-4 col-md-push-4 text-xs-center">
+            <div class="alert alert-info" role="alert">
+              <strong>Babblet created.</strong> Link to the chat room has been sent to recipients email addresses.
+            </div>
+          </div>
+        </div>
+        <div class="row" id="error">
+          <div class="col-md-4 col-md-push-4 text-xs-center">
+            <div class="alert alert-danger" role="alert">
+              <strong>Darn it!</strong> Something went wrong. Perhaps try again?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

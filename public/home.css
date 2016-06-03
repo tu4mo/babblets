@@ -1,0 +1,61 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background-image: radial-gradient(rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .7) 100%), url('images/background.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  font-weight: 100;
+  min-height: 100%;
+}
+
+.cover {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.cover-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+h1 {
+  color: #5bc0de;
+  font-family: 'Raleway Dots';
+  text-transform: lowercase;
+}
+
+strong {
+  font-weight: 300;
+}
+
+.lead {
+  font-weight: 100;
+}
+
+.friends-email-animate {
+  animation: reveal;
+  animation-duration: .5s;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#success,
+#error {
+  display: none;
+}

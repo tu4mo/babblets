@@ -1,0 +1,114 @@
+@import '../../stylesheets/globals.scss';
+
+.message {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  max-width: 700px;
+  padding: 0 15px;
+
+  &__user {
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    font-size: .7rem;
+    line-height: 1;
+    padding: 5px 15px;
+  }
+
+  &__bubble {
+    background: #fff;
+    border-radius: 10px;
+    color: #333;
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin-bottom: 5px;
+    min-width: 200px;
+    max-width: calc(100% - 30px);
+
+    &:after {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #fff;
+      display: block;
+      left: -10px;
+      margin-top: -10px;
+      top: 70%;
+      width: 0;
+    }
+  }
+
+  &__text {
+    padding: 15px;
+
+    a {
+      color: $color-cyan;
+    }
+  }
+
+  &__time {
+    color: #999;
+    font-size: .7rem;
+  }
+
+  &:last-child &__bubble {
+    animation: new-comment .5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+}
+
+.message--owner {
+  text-align: right;
+
+  .message__bubble {
+    background: $color-cyan;
+    color: #fff;
+
+    &:after {
+      border-width: 10px 0 10px 10px;
+      border-color: transparent $color-cyan;
+      left: auto;
+      right: -10px;
+    }
+  }
+
+  .message__text {
+    & a {
+      color: #fff;
+    }
+  }
+}
+
+@keyframes new-comment {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}

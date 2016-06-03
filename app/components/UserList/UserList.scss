@@ -1,0 +1,36 @@
+@import '../../stylesheets/globals';
+
+.userlist {
+  background: rgba(#fff, .5);
+  bottom: 50px;
+  display: none;
+  top: 40px;
+  position: fixed;
+  right: 0;
+  width: 200px;
+
+  &--active {
+
+  }
+
+  @include tablet {
+    display: block;
+  }
+
+  &-user {
+    border-bottom: 1px solid #fff;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+
+    &__name {
+      color: $color-cyan;
+      font-size: .7rem;
+    }
+
+    &__last-active {
+      color: #aaa;
+      font-size: .7rem;
+    }
+  }
+}
