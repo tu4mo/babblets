@@ -22,7 +22,6 @@ export default class Chat extends React.Component {
       cache: false,
       success: (data) => {
         this.setState({ data: data });
-        console.log(data);
       },
       error: (xhr, status, err) => {
         console.error(this.props.messagesurl, status, err.toString());
