@@ -1,23 +1,23 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-var chat = require('../controllers/chat');
+var chat = require('../controllers/chat')
 
 router.post('/chat', function(req, res) {
   chat.createChat(req.body.emails, function(status) {
-    res.send(status);
-  });
-});
+    res.send(status)
+  })
+})
 
 router.get('/messages', function(req, res) {
   chat.getChatByUser(req.query.user, req.query.token, (chat) => {
     if (chat != null) {
-      res.json(chat);
+      res.json(chat)
     } else {
-      res.status(500).send(req.body);
+      res.status(500).send(req.body)
     }
-  });
-});
+  })
+})
 
 router.post('/messages', function(req, res) {
   chat.getChatByUser(req.query.user, req.query.token, function(chat) {
@@ -25,16 +25,16 @@ router.post('/messages', function(req, res) {
       chat.messages.push({
         user: req.query.user,
         text: req.body.text
-      });
+      })
 
       chat.save(err => {
-        console.log(err);
-        res.json(chat);
-      });
+        console.log(err)
+        res.json(chat)
+      })
     } else {
-      res.status(500).send(req.body);
+      res.status(500).send(req.body)
     }
-  });
-});
+  })
+})
 
-module.exports = router;
+module.exports = router

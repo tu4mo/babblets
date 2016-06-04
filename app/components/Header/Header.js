@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import Users from '../Users/Users';
+import Users from '../Users/Users'
 
-import styles from './Header.scss';
+import styles from './Header.scss'
 
 export default class Header extends React.Component {
   render() {
@@ -11,6 +11,6 @@ export default class Header extends React.Component {
         <h1>Babblets</h1>
         <Users data={this.props.data} />
       </header>
-    );
+    )
   }
 }

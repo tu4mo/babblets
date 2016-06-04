@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import AutoLinkText from 'react-autolink-text';
-import moment from 'moment';
+import AutoLinkText from 'react-autolink-text'
+import moment from 'moment'
 
-import styles from './Message.scss';
+import styles from './Message.scss'
 
 export default class Message extends React.Component {
   render() {
@@ -21,6 +21,6 @@ export default class Message extends React.Component {
           {moment(this.props.time).fromNow()}
         </div>
       </div>
-    );
+    )
   }
 }

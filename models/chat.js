@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var ChatSchema = new mongoose.Schema({
   users: [
@@ -18,6 +18,6 @@ var ChatSchema = new mongoose.Schema({
       }
     }
   ]
-});
+})
 
-module.exports = mongoose.model('Chat', ChatSchema);
+module.exports = mongoose.model('Chat', ChatSchema)

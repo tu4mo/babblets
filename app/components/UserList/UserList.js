@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import moment from 'moment';
+import moment from 'moment'
 
-import styles from './UserList.scss';
+import styles from './UserList.scss'
 
 export default class UserList extends React.Component {
   render() {
-    let users = [];
+    let users = []
 
     if (this.props.data) {
       users = this.props.data.map(user => {
-        let lastActive = 'unactive';
+        let lastActive = 'unactive'
 
         if (user.last_active) {
-          let secondsUnactive = (Date.now() - Date.parse(user.last_active)) / 1000;
+          let secondsUnactive = (Date.now() - Date.parse(user.last_active)) / 1000
 
           if (secondsUnactive < 30) {
-            lastActive = 'active';
+            lastActive = 'active'
           }
         }
 
@@ -29,7 +29,7 @@ export default class UserList extends React.Component {
               {lastActive}
             </div>
           </div>
-        );
+        )
       })
     }
 
@@ -37,6 +37,6 @@ export default class UserList extends React.Component {
       <div className='userlist'>
         {users}
       </div>
-    );
+    )
   }
 }

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-var chat = require('../controllers/chat');
+var chat = require('../controllers/chat')
 
 router.get('/chat/:token/:user', function(request, response) {
   chat.getChatByUser(request.params.user, request.params.token, function(chat) {
@@ -9,8 +9,8 @@ router.get('/chat/:token/:user', function(request, response) {
       authorized: (chat != null),
       user: request.params.user,
       token: request.params.token
-    });
-  });
-});
+    })
+  })
+})
 
-module.exports = router;
+module.exports = router

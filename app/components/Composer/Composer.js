@@ -1,32 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import Chat from '../Chat/Chat';
+import Chat from '../Chat/Chat'
 
-import styles from './Composer.scss';
+import styles from './Composer.scss'
 
 export default class Composer extends React.Component {
   constructor() {
-    super();
-    this.state = { text: '' };
+    super()
+    this.state = { text: '' }
   }
 
   handleTextChange(e) {
-    this.setState({ text: e.target.value });
+    this.setState({ text: e.target.value })
   }
 
   onSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    let text = this.state.text.trim();
+    let text = this.state.text.trim()
     if (!text) {
-      return;
+      return
     }
 
-    this.props.onMessageSubmit({ text: text });
-    this.setState({ text: '' });
-    Chat.scrollToBottom();
-    ReactDOM.findDOMNode(this.refs.composerInput).focus();
+    this.props.onMessageSubmit({ text: text })
+    this.setState({ text: '' })
+    Chat.scrollToBottom()
+    ReactDOM.findDOMNode(this.refs.composerInput).focus()
   }
 
   render() {
@@ -50,6 +50,6 @@ export default class Composer extends React.Component {
           />
         </form>
       </div>
-    );
+    )
   }
 }

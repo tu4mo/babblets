@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import Composer from '../Composer/Composer';
-import Header from '../Header/Header';
-import MessageList from '../MessageList/MessageList';
-import UserList from '../UserList/UserList';
+import Composer from '../Composer/Composer'
+import Header from '../Header/Header'
+import MessageList from '../MessageList/MessageList'
+import UserList from '../UserList/UserList'
 
-import styles from './Chat.scss';
+import styles from './Chat.scss'
 
-import $ from 'jquery';
+import $ from 'jquery'
 
 export default class Chat extends React.Component {
   constructor() {
-    super();
-    this.state = { data: [] };
+    super()
+    this.state = { data: [] }
   }
 
   loadMessages() {
@@ -21,10 +21,10 @@ export default class Chat extends React.Component {
       dataType: 'json',
       cache: false,
       success: (data) => {
-        this.setState({ data: data });
+        this.setState({ data: data })
       },
       error: (xhr, status, err) => {
-        console.error(this.props.messagesurl, status, err.toString());
+        console.error(this.props.messagesurl, status, err.toString())
       }
     })
   }
@@ -36,37 +36,37 @@ export default class Chat extends React.Component {
       type: 'POST',
       data: message,
       success: data => {
-        // this.setState({ data: data });
+        // this.setState({ data: data })
       },
       error: (xhr, status, err) => {
-        // this.setState({ data: messages });
-        console.error(this.props.messagesurl, status, err.toString());
+        // this.setState({ data: messages })
+        console.error(this.props.messagesurl, status, err.toString())
       }
     })
   }
 
   componentDidMount() {
-    this.loadMessages();
-    this.loadMessagesInterval = setInterval(this.loadMessages.bind(this), this.props.pollInterval);
-    Chat.scrollToBottom();
+    this.loadMessages()
+    this.loadMessagesInterval = setInterval(this.loadMessages.bind(this), this.props.pollInterval)
+    Chat.scrollToBottom()
   }
 
   componentWillUpdate() {
-    this.shouldScrollBottom = document.body.scrollTop === document.body.scrollHeight - window.innerHeight;
+    this.shouldScrollBottom = document.body.scrollTop === document.body.scrollHeight - window.innerHeight
   }
 
   componentDidUpdate() {
     if (this.shouldScrollBottom) {
-      Chat.scrollToBottom();
+      Chat.scrollToBottom()
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.loadMessagesInterval);
+    clearInterval(this.loadMessagesInterval)
   }
 
   static scrollToBottom() {
-    document.body.scrollTop = document.body.scrollHeight;
+    document.body.scrollTop = document.body.scrollHeight
   }
 
   render() {
@@ -76,6 +76,6 @@ export default class Chat extends React.Component {
         <MessageList data={this.state.data.messages} />
         <Composer onMessageSubmit={this.handleMessageSubmit.bind(this)} />
       </div>
-    );
+    )
   }
 }
