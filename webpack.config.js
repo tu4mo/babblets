@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './app/app'
+    path.join(__dirname, 'app', 'app.js')
   ],
   output: {
     path: path.join(__dirname, 'public'),
@@ -13,6 +13,7 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],

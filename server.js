@@ -37,16 +37,15 @@ app.use(function(req, res, next) {
 app.use('/', routes);
 app.use('/api', api);
 
+// Setup webpack middleware
 var webpack = require('webpack');
-var webpackConfig = require('./webpack.config.js');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var webpackConfig = require('./webpack.config');
 var compiler = webpack(webpackConfig);
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(webpackDevMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 // Start the server
 app.listen(app.get('port'), function() {
