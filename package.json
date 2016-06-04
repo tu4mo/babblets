@@ -33,8 +33,10 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "production": "NODE_ENV=production webpack -p --config webpack.production.config.js"
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --stats --config ./webpack.production.config.js",
+    "dev": "NODE_ENV=development node server.js",
+    "postinstall": "npm run build",
+    "production": "NODE_ENV=production node server.js"
   },
   "author": "tu4mo",
   "engines": {
