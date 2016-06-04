@@ -1,8 +1,7 @@
 var validator = require('validator');
 var randomstring = require('../lib/randomstring');
 
-var config = require('../config/config.json');
-var mailgun = require('mailgun-js')({apiKey: config.mailgun.api_key, domain: config.mailgun.domain})
+var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN})
 
 var Chat = require('../models/chat');
 

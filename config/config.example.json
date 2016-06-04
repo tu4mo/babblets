@@ -1,7 +1,0 @@
-{
-  "mailgun": {
-    "api_key": "",
-    "domain": ""
-  },
-  "mongodb": ""
-}

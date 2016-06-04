@@ -1,5 +1,3 @@
-var config = require('./config/config.json');
-
 // Require dependencies
 var path = require('path');
 var express = require('express');
@@ -7,7 +5,7 @@ var bodyParser = require('body-parser');
 
 // Setup database
 var mongoose = require('mongoose');
-mongoose.connect(config.mongodb);
+mongoose.connect(process.env.MONGOLAB_URI);
 
 // Require routes
 var routes = require('./routes/index');
