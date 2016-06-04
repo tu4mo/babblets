@@ -40,7 +40,7 @@
   },
   "author": "tu4mo",
   "engines": {
-    "node": "4.4.5"
+    "node": "6.2.1"
   },
   "private": true
 }
