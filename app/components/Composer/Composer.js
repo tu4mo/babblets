@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
 import Chat from '../Chat/Chat'
-
 import styles from './Composer.scss'
 
-export default class Composer extends React.Component {
-  constructor() {
-    super()
-    this.state = { text: '' }
+export default class Composer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      text: ''
+    }
   }
 
-  handleTextChange(e) {
+  onTextChange(e) {
     this.setState({ text: e.target.value })
   }
 
@@ -40,7 +41,7 @@ export default class Composer extends React.Component {
             value={this.state.text}
             ref="composerInput"
             autoFocus
-            onChange={this.handleTextChange.bind(this)}
+            onChange={this.onTextChange.bind(this)}
           />
           <input
             className="composer__button"

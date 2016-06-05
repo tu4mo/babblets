@@ -1,18 +1,17 @@
-import React from 'react'
-
-import Composer from '../Composer/Composer'
+import React, { Component } from 'react'
+import $ from 'jquery'
 import Header from '../Header/Header'
+import Composer from '../Composer/Composer'
 import MessageList from '../MessageList/MessageList'
 import UserList from '../UserList/UserList'
 
-import styles from './Chat.scss'
+export default class Chat extends Component {
+  constructor(props) {
+    super(props)
 
-import $ from 'jquery'
-
-export default class Chat extends React.Component {
-  constructor() {
-    super()
-    this.state = { data: [] }
+    this.state = {
+			data: []
+		}
   }
 
   loadMessages() {
@@ -20,8 +19,8 @@ export default class Chat extends React.Component {
       url: this.props.messagesurl,
       dataType: 'json',
       cache: false,
-      success: (data) => {
-        this.setState({ data: data })
+      success: data => {
+        this.setState({ data })
       },
       error: (xhr, status, err) => {
         console.error(this.props.messagesurl, status, err.toString())
@@ -29,7 +28,7 @@ export default class Chat extends React.Component {
     })
   }
 
-  handleMessageSubmit(message) {
+  onMessageSubmit(message) {
     $.ajax({
       url: this.props.messagesurl,
       dataType: 'json',
@@ -74,7 +73,7 @@ export default class Chat extends React.Component {
       <div className="chat">
         <Header data={this.state.data.users} />
         <MessageList data={this.state.data.messages} />
-        <Composer onMessageSubmit={this.handleMessageSubmit.bind(this)} />
+        <Composer onMessageSubmit={this.onMessageSubmit.bind(this)} />
       </div>
     )
   }

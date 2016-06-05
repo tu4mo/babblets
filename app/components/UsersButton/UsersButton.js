@@ -1,10 +1,10 @@
-import React from 'react'
-
+import React, { Component } from 'react'
 import styles from './UsersButton.scss'
 
-export default class UsersButton extends React.Component {
-  constructor() {
-    super()
+export default class UsersButton extends Component {
+  constructor(props) {
+    super(props)
+
     this.state = {
       isHovering: false
     }
