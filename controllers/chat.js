@@ -74,7 +74,7 @@ function sendEmails(users) {
       from: 'Babblets <me@samples.mailgun.org>',
       to: user.email,
       subject: 'Link to your chat room',
-      text: 'Hi!\n\nhttp://localhost:3000/chat/' + user.token + '/' + user.email
+      text: 'Hi!\n\n' + process.env.BABBLETS_URL + '/chat/' + user.token + '/' + user.email
     }
 
     mailgun.messages().send(data, function(err, body) {
