@@ -10,8 +10,8 @@ export default class Chat extends Component {
     super(props)
 
     this.state = {
-			data: []
-		}
+      data: []
+    }
   }
 
   loadMessages() {
