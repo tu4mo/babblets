@@ -8,7 +8,7 @@ const Message = ({ user: messageUser, children, time }) => {
     <div className={'message' + (messageUser === user ? ' message--owner' : '')}>
       <div className="message__bubble">
         <div className="message__user">
-          {user}
+          {messageUser}
         </div>
         <div className="message__text">
           <AutoLinkText text={children} />
