@@ -16,6 +16,18 @@ var api = require('./routes/api')
 // Create an express instance
 var app = express()
 
+// Setup webpack middleware
+if (process.env.NODE_ENV === 'development') {
+  var webpack = require('webpack')
+  var webpackDevMiddleware = require('webpack-dev-middleware')
+  var webpackHotMiddleware = require('webpack-hot-middleware')
+  var webpackConfig = require('./webpack.config')
+  var compiler = webpack(webpackConfig)
+
+  app.use(webpackDevMiddleware(compiler))
+  app.use(webpackHotMiddleware(compiler))
+}
+
 // Set port
 app.set('port', (process.env.PORT || 3000))
 
@@ -37,17 +49,6 @@ app.use(function(req, res, next) {
 app.use('/', routes)
 app.use('/api', api)
 
-// Setup webpack middleware
-if (process.env.NODE_ENV === 'development') {
-  var webpack = require('webpack')
-  var webpackDevMiddleware = require('webpack-dev-middleware')
-  var webpackHotMiddleware = require('webpack-hot-middleware')
-  var webpackConfig = require('./webpack.config')
-  var compiler = webpack(webpackConfig)
-
-  app.use(webpackDevMiddleware(compiler))
-  app.use(webpackHotMiddleware(compiler))
-}
 
 // Start the server
 app.listen(app.get('port'), function() {
