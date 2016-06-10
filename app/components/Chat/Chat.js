@@ -4,6 +4,9 @@ import Header from '../Header/Header'
 import Composer from '../Composer/Composer'
 import MessageList from '../MessageList/MessageList'
 import UserList from '../UserList/UserList'
+import io from 'socket.io-client'
+
+const socket = io(window.location.origin)
 
 export default class Chat extends Component {
   constructor(props) {
@@ -12,6 +15,16 @@ export default class Chat extends Component {
     this.state = {
       data: []
     }
+
+    socket.emit('room', room)
+
+    socket.on('new message', message => {
+      let data = this.state.data
+      let messages = data.messages
+      messages.push(message)
+      data.messages = messages
+      this.setState({ data })
+    })
   }
 
   loadMessages() {
@@ -29,24 +42,18 @@ export default class Chat extends Component {
   }
 
   onMessageSubmit(message) {
-    $.ajax({
-      url: this.props.messagesurl,
-      dataType: 'json',
-      type: 'POST',
-      data: message,
-      success: data => {
-        // this.setState({ data: data })
-      },
-      error: (xhr, status, err) => {
-        // this.setState({ data: messages })
-        console.error(this.props.messagesurl, status, err.toString())
-      }
+    socket.emit('new message', {
+      user,
+      token,
+      message
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.loadMessages()
-    this.loadMessagesInterval = setInterval(this.loadMessages.bind(this), this.props.pollInterval)
+  }
+
+  componentDidMount() {
     Chat.scrollToBottom()
   }
 
@@ -58,10 +65,6 @@ export default class Chat extends Component {
     if (this.shouldScrollBottom) {
       Chat.scrollToBottom()
     }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.loadMessagesInterval)
   }
 
   static scrollToBottom() {
