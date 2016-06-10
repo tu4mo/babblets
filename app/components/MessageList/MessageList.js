@@ -9,7 +9,7 @@ const MessageList = ({ data }) => {
     messages = data.map(message => {
       return (
         <Message user={message.user} key={message._id} time={message.time}>
-          {message.text}
+          {message.message}
         </Message>
       )
     })

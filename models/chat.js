@@ -11,7 +11,7 @@ var ChatSchema = new mongoose.Schema({
   messages: [
     {
       user: String,
-      text: String,
+      message: String,
       time: {
         type: Date,
         default: Date.now
