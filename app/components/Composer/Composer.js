@@ -8,24 +8,25 @@ export default class Composer extends Component {
     super(props)
 
     this.state = {
-      text: ''
+      message: ''
     }
   }
 
   onTextChange(e) {
-    this.setState({ text: e.target.value })
+    this.setState({ message: e.target.value })
   }
 
   onSubmit(e) {
     e.preventDefault()
 
-    let text = this.state.text.trim()
-    if (!text) {
+    const message = this.state.message.trim()
+
+    if (!message) {
       return
     }
 
-    this.props.onMessageSubmit({ text: text })
-    this.setState({ text: '' })
+    this.props.onMessageSubmit(message)
+    this.setState({ message: '' })
     Chat.scrollToBottom()
     ReactDOM.findDOMNode(this.refs.composerInput).focus()
   }
@@ -38,7 +39,7 @@ export default class Composer extends Component {
             className="composer__field"
             type="text"
             placeholder="Write a message"
-            value={this.state.text}
+            value={this.state.message}
             ref="composerInput"
             autoFocus
             onChange={this.onTextChange.bind(this)}
@@ -47,7 +48,7 @@ export default class Composer extends Component {
             className="composer__button"
             type="submit"
             value="Send"
-            disabled={!this.state.text}
+            disabled={!this.state.message}
           />
         </form>
       </div>
