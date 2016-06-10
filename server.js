@@ -22,7 +22,7 @@ var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 
 // Setup webpack middleware
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   var webpack = require('webpack')
   var webpackDevMiddleware = require('webpack-dev-middleware')
   var webpackHotMiddleware = require('webpack-hot-middleware')
