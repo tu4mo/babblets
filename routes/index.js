@@ -8,7 +8,8 @@ router.get('/chat/:token/:user', function(request, response) {
     response.render('chat', {
       authorized: (chat != null),
       user: request.params.user,
-      token: request.params.token
+      token: request.params.token,
+      room: chat._id
     })
   })
 })
