@@ -1,6 +1,7 @@
 import React from 'react'
 import Users from '../Users/Users'
-import styles from './Header.scss'
+
+import './Header.scss'
 
 const Header = ({ data }) => {
   return (

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Chat from '../Chat/Chat'
-import styles from './Composer.scss'
+
+import './Composer.scss'
 
 export default class Composer extends Component {
   constructor(props) {

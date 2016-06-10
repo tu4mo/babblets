@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './UserList.scss'
+
+import './UserList.scss'
 
 const UserList = ({ data }) => {
   let users = []

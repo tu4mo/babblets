@@ -1,6 +1,7 @@
 import React from 'react'
 import Message from '../Message/Message'
-import styles from './MessageList.scss'
+
+import './MessageList.scss'
 
 const MessageList = ({ data }) => {
   let messages = []

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import styles from './UsersButton.scss'
+
+import './UsersButton.scss'
 
 export default class UsersButton extends Component {
   constructor(props) {
