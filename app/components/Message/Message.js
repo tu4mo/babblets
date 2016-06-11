@@ -4,15 +4,15 @@ import moment from 'moment'
 
 import './Message.scss'
 
-const Message = ({ user: messageUser, children, time }) => {
+const Message = ({ user, owner, children, time, message }) => {
   return (
-    <div className={'message' + (messageUser === user ? ' message--owner' : '')}>
+    <div className={'message' + (owner ? ' message--owner' : '')}>
       <div className="message__bubble">
         <div className="message__user">
-          {messageUser}
+          {user}
         </div>
         <div className="message__text">
-          <AutoLinkText text={children} />
+          <AutoLinkText text={message} />
         </div>
       </div>
       <div className="message__time">

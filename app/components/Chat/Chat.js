@@ -16,7 +16,7 @@ export default class Chat extends Component {
       data: []
     }
 
-    socket.emit('room', room)
+    socket.emit('room', this.props.room)
 
     socket.on('new message', message => {
       let data = this.state.data
@@ -43,8 +43,8 @@ export default class Chat extends Component {
 
   onMessageSubmit(message) {
     socket.emit('new message', {
-      user,
-      token,
+      user: this.props.user,
+      token: this.props.token,
       message
     })
   }
@@ -75,7 +75,10 @@ export default class Chat extends Component {
     return (
       <div className="chat">
         <Header data={this.state.data.users} />
-        <MessageList data={this.state.data.messages} />
+        <MessageList
+          data={this.state.data.messages}
+          user={this.props.user}
+        />
         <Composer onMessageSubmit={this.onMessageSubmit.bind(this)} />
       </div>
     )

@@ -36,8 +36,8 @@ if (process.env.NODE_ENV !== 'production') {
 // Set port
 app.set('port', (process.env.PORT || 3000))
 
-// Set templating engine to Jade
-app.set('view engine', 'jade')
+// Set templating engine to Handlebars
+app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
 
@@ -75,7 +75,7 @@ io.on('connection', function(socket) {
 
         chat['messages'].push(newMessage)
 
-        chat.save((err, test) => {
+        chat.save(err => {
           io.to(chat._id).emit('new message', newMessage)
         })
       }
