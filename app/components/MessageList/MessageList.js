@@ -3,15 +3,19 @@ import Message from '../Message/Message'
 
 import './MessageList.scss'
 
-const MessageList = ({ data }) => {
+const MessageList = props => {
   let messages = []
 
-  if (data) {
-    messages = data.map(message => {
+  if (props.data) {
+    messages = props.data.map(({ user, _id, time, message }) => {
       return (
-        <Message user={message.user} key={message._id} time={message.time}>
-          {message.message}
-        </Message>
+        <Message
+          user={user}
+          owner={user === props.user}
+          key={_id}
+          time={time}
+          message={message}
+        />
       )
     })
   }
