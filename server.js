@@ -75,7 +75,7 @@ io.on('connection', function(socket) {
 
         chat['messages'].push(newMessage)
 
-        chat.save((err, test) => {
+        chat.save(err => {
           io.to(chat._id).emit('new message', newMessage)
         })
       }
