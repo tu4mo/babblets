@@ -5,6 +5,6 @@ import Chat from './components/Chat/Chat'
 import './stylesheets/base.scss'
 
 ReactDOM.render(
-  <Chat messagesurl={'/api/messages?user=' + user + '&token=' + token} pollInterval={2000} />,
+  <Chat messagesurl={'/api/messages?user=' + user + '&token=' + token} />,
   document.getElementById('content')
 )
