@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "eslint": "^2.12.0",
+    "nodemon": "^1.9.2",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
@@ -41,7 +42,7 @@
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --stats --config ./webpack.production.config.js",
     "postinstall": "npm run build",
     "production": "NODE_ENV=production node server.js",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test:lint": "eslint . --ext .js"
   },
   "engines": {
