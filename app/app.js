@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import Chat from './components/Chat/Chat'
 
 import './stylesheets/base.scss'
 
 const url = `/api/messages?user=${babblets.user}&token=${babblets.token}`
 
-ReactDOM.render(
+render(
   <Chat
     messagesurl={url}
     user={babblets.user}
