@@ -13,17 +13,15 @@ export default class Chat extends Component {
     super(props)
 
     this.state = {
-      data: []
+      messages: [],
+      users: []
     }
 
     socket.emit('room', this.props.room)
 
     socket.on('new message', message => {
-      let data = this.state.data
-      let messages = data.messages
-      messages.push(message)
-      data.messages = messages
-      this.setState({ data })
+      const messages = [...this.state.messages, message]
+      this.setState({ messages })
     })
   }
 
@@ -32,8 +30,11 @@ export default class Chat extends Component {
       url: this.props.messagesurl,
       dataType: 'json',
       cache: false,
-      success: data => {
-        this.setState({ data })
+      success: ({ users, messages }) => {
+        this.setState({
+          users,
+          messages
+        })
       },
       error: (xhr, status, err) => {
         console.error(this.props.messagesurl, status, err.toString())
@@ -74,9 +75,9 @@ export default class Chat extends Component {
   render() {
     return (
       <div className="chat">
-        <Header data={this.state.data.users} />
+        <Header data={this.state.users} />
         <MessageList
-          data={this.state.data.messages}
+          messages={this.state.messages}
           user={this.props.user}
         />
         <Composer onMessageSubmit={this.onMessageSubmit.bind(this)} />

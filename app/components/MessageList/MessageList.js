@@ -6,8 +6,8 @@ import './MessageList.scss'
 const MessageList = props => {
   let messages = []
 
-  if (props.data) {
-    messages = props.data.map(({ user, _id, time, message }) => {
+  if (props.messages) {
+    messages = props.messages.map(({ user, _id, time, message }) => {
       return (
         <Message
           user={user}
