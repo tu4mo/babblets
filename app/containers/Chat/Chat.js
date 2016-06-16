@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getMessages, newMessage } from '../../actions'
+import * as MessageActions from '../../actions/messages'
 import Header from '../../components/Header/Header'
 import Composer from '../../components/Composer/Composer'
 import MessageList from '../../components/MessageList/MessageList'
@@ -73,4 +74,8 @@ function mapStateToProps(state) {
   return { messages: state.messages }
 }
 
-export default connect(mapStateToProps, { getMessages, newMessage })(Chat)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(MessageActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)
