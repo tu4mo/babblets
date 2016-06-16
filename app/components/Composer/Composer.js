@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
-
 import './Composer.scss'
 
 export default class Composer extends Component {

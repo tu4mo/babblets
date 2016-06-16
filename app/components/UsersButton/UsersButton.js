@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import './UsersButton.scss'
 
 export default class UsersButton extends Component {

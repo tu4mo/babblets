@@ -1,7 +1,6 @@
 import React from 'react'
 import AutoLinkText from 'react-autolink-text'
 import moment from 'moment'
-
 import './Message.scss'
 
 const Message = ({ user, owner, children, time, message }) => {

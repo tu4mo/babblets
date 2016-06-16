@@ -1,6 +1,5 @@
 import React from 'react'
 import Users from '../Users/Users'
-
 import './Header.scss'
 
 const Header = ({ data }) => {
