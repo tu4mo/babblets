@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import $ from 'jquery'
-import Header from '../Header/Header'
-import Composer from '../Composer/Composer'
-import MessageList from '../MessageList/MessageList'
-import UserList from '../UserList/UserList'
+import { connect } from 'react-redux'
+import { getMessages, newMessage } from '../../actions'
+import Header from '../../components/Header/Header'
+import Composer from '../../components/Composer/Composer'
+import MessageList from '../../components/MessageList/MessageList'
+import UserList from '../../components/UserList/UserList'
 import io from 'socket.io-client'
 
 const socket = io(window.location.origin)
@@ -13,32 +14,14 @@ export default class Chat extends Component {
     super(props)
 
     this.state = {
-      messages: [],
       users: []
     }
 
     socket.emit('room', this.props.room)
 
     socket.on('new message', message => {
-      const messages = [...this.state.messages, message]
-      this.setState({ messages })
-    })
-  }
-
-  loadMessages() {
-    $.ajax({
-      url: this.props.messagesurl,
-      dataType: 'json',
-      cache: false,
-      success: ({ users, messages }) => {
-        this.setState({
-          users,
-          messages
-        })
-      },
-      error: (xhr, status, err) => {
-        console.error(this.props.messagesurl, status, err.toString())
-      }
+      this.props.newMessage(message)
+      Chat.scrollToBottom()
     })
   }
 
@@ -51,7 +34,7 @@ export default class Chat extends Component {
   }
 
   componentWillMount() {
-    this.loadMessages()
+    this.props.getMessages()
   }
 
   componentDidMount() {
@@ -77,7 +60,7 @@ export default class Chat extends Component {
       <div className="chat">
         <Header data={this.state.users} />
         <MessageList
-          messages={this.state.messages}
+          messages={this.props.messages}
           user={this.props.user}
         />
         <Composer onMessageSubmit={this.onMessageSubmit.bind(this)} />
@@ -85,3 +68,9 @@ export default class Chat extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return { messages: state.messages }
+}
+
+export default connect(mapStateToProps, { getMessages, newMessage })(Chat)

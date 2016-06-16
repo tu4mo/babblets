@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Chat from '../Chat/Chat'
+import { findDOMNode } from 'react-dom'
 
 import './Composer.scss'
 
@@ -28,8 +27,7 @@ export default class Composer extends Component {
 
     this.props.onMessageSubmit(message)
     this.setState({ message: '' })
-    Chat.scrollToBottom()
-    ReactDOM.findDOMNode(this.refs.composerInput).focus()
+    findDOMNode(this.refs.composerInput).focus()
   }
 
   render() {
