@@ -9,14 +9,11 @@ import reducers from './reducers'
 
 import './stylesheets/base.scss'
 
-const url = `/api/messages?user=${babblets.user}&token=${babblets.token}`
-
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
 render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Chat
-      messagesurl={url}
       user={babblets.user}
       token={babblets.token}
       room={babblets.room}
