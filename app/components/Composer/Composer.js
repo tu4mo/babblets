@@ -9,6 +9,9 @@ export default class Composer extends Component {
     this.state = {
       message: ''
     }
+
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onTextChange = this.onTextChange.bind(this)
   }
 
   onTextChange(e) {
@@ -32,7 +35,7 @@ export default class Composer extends Component {
   render() {
     return (
       <div className="composer">
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
           <input
             className="composer__field"
             type="text"
@@ -40,7 +43,7 @@ export default class Composer extends Component {
             value={this.state.message}
             ref="composerInput"
             autoFocus
-            onChange={this.onTextChange.bind(this)}
+            onChange={this.onTextChange}
           />
           <input
             className="composer__button"
