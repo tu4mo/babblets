@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-var ChatSchema = new mongoose.Schema({
+const ChatSchema = new mongoose.Schema({
   users: [
     {
       email: String,

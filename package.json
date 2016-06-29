@@ -50,7 +50,7 @@
     "test:lint": "eslint . --ext .js"
   },
   "engines": {
-    "node": "6.2.1"
+    "node": "6.2.2"
   },
   "private": true
 }

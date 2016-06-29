@@ -1,15 +1,14 @@
-var express = require('express')
-var router = express.Router()
+const chat = require('../controllers/chat')
+const express = require('express')
+const router = express.Router()
 
-var chat = require('../controllers/chat')
-
-router.post('/chat', function(req, res) {
+router.post('/chat', (req, res) => {
   chat.createChat(req.body.emails, function(status) {
     res.send(status)
   })
 })
 
-router.get('/messages', function(req, res) {
+router.get('/messages', (req, res) => {
   chat.getChatByUser(req.query.user, req.query.token, (chat) => {
     if (chat != null) {
       res.json(chat)
@@ -19,15 +18,15 @@ router.get('/messages', function(req, res) {
   })
 })
 
-router.post('/messages', function(req, res) {
-  chat.getChatByUser(req.query.user, req.query.token, function(chat) {
+router.post('/messages', (req, res) => {
+  chat.getChatByUser(req.query.user, req.query.token, (chat) => {
     if (chat != null) {
       chat.messages.push({
         user: req.query.user,
         text: req.body.text
       })
 
-      chat.save(err => {
+      chat.save((err) => {
         console.log(err)
         res.json(chat)
       })

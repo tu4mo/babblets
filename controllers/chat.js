@@ -1,13 +1,11 @@
-var validator = require('validator')
-var randomstring = require('../lib/randomstring')
-
-var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN})
-
-var Chat = require('../models/chat')
+const Chat = require('../models/chat')
+const mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN})
+const randomstring = require('../lib/randomstring')
+const validator = require('validator')
 
 module.exports = {
-  createChat: function(emails, callback) {
-    var users = []
+  createChat: (emails, callback) => {
+    let users = []
 
     // Validate email addresses
     if (!validateEmailAddresses(emails)) {
@@ -16,7 +14,7 @@ module.exports = {
     }
 
     // Create users with tokens
-    emails.map(function(email) {
+    emails.map((email) => {
       users.push(
         {
           email: email,
@@ -26,12 +24,12 @@ module.exports = {
     })
 
     // Create new chat
-    var newChat = new Chat({
+    const newChat = new Chat({
       users: users
     })
 
     // Save chat
-    newChat.save(function(err) {
+    newChat.save((err) => {
       if (!err) {
         sendEmails(users)
       }
@@ -40,7 +38,7 @@ module.exports = {
     callback('OK')
   },
 
-  getChatByUser: function(user, token, callback) {
+  getChatByUser: (user, token, callback) => {
     Chat.findOneAndUpdate({
       users: {
         $elemMatch: {
@@ -52,16 +50,16 @@ module.exports = {
       '$set': {
         'users.$.last_active': Date.now()
       }
-    }, function(err, chat) {
+    }, (err, chat) => {
       callback(chat)
     })
   }
 }
 
 function validateEmailAddresses(emails) {
-  var valid = true
+  let valid = true
 
-  emails.forEach(function(email) {
+  emails.forEach((email) => {
     if (!validator.isEmail(email)) valid = false
   })
 
@@ -69,12 +67,12 @@ function validateEmailAddresses(emails) {
 }
 
 function sendEmails(users) {
-  users.forEach(function(user) {
-    var data = {
+  users.forEach((user) => {
+    const data = {
       from: 'Babblets <me@samples.mailgun.org>',
       to: user.email,
       subject: 'Link to your chat room',
-      text: 'Hi!\n\n' + process.env.BABBLETS_URL + '/chat/' + user.token + '/' + user.email
+      text: `Hi!\n\n${process.env.BABBLETS_URL}/chat/${user.token}/${user.email}`
     }
 
     mailgun.messages().send(data, function(err, body) {

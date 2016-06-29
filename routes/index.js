@@ -1,14 +1,13 @@
-var express = require('express')
-var router = express.Router()
+const chat = require('../controllers/chat')
+const express = require('express')
+const router = express.Router()
 
-var chat = require('../controllers/chat')
-
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.render('index', { layout: null })
 })
 
-router.get('/chat/:token/:user', function(req, res) {
-  chat.getChatByUser(req.params.user, req.params.token, function(chat) {
+router.get('/chat/:token/:user', (req, res) => {
+  chat.getChatByUser(req.params.user, req.params.token, (chat) => {
     if (chat != null) {
       res.render('chat', {
         user: req.params.user,

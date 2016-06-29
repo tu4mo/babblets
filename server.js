@@ -1,33 +1,34 @@
+'use strict'
+
 require('dotenv').config({ silent: true })
 
 // Require dependencies
-var path = require('path')
-var express = require('express')
-var bodyParser = require('body-parser')
+const express = require('express')
+const bodyParser = require('body-parser')
 
 // Controllers
-var chat = require('./controllers/chat')
+const chat = require('./controllers/chat')
 
 // Setup database
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGOLAB_URI)
 
 // Require routes
-var routes = require('./routes/index')
-var api = require('./routes/api')
+const routes = require('./routes/index')
+const api = require('./routes/api')
 
 // Create an express and socket.io instance
-var app = express()
-var server = require('http').createServer(app)
-var io = require('socket.io')(server)
+const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 // Setup webpack middleware
 if (process.env.NODE_ENV !== 'production') {
-  var webpack = require('webpack')
-  var webpackDevMiddleware = require('webpack-dev-middleware')
-  var webpackHotMiddleware = require('webpack-hot-middleware')
-  var webpackConfig = require('./webpack.config')
-  var compiler = webpack(webpackConfig)
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
+  const webpackConfig = require('./webpack.config')
+  const compiler = webpack(webpackConfig)
 
   app.use(webpackDevMiddleware(compiler))
   app.use(webpackHotMiddleware(compiler))
@@ -44,7 +45,7 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Cache-Control', 'no-cache')
   next()
@@ -60,22 +61,22 @@ server.listen(app.get('port'), function() {
 })
 
 // Setup socket
-io.on('connection', function(socket) {
-  socket.on('room', function(room) {
+io.on('connection', (socket) => {
+  socket.on('room', (room) => {
     socket.join(room)
   })
 
-  socket.on('new message', function(data) {
-    chat.getChatByUser(data.user, data.token, function(chat) {
+  socket.on('new message', (data) => {
+    chat.getChatByUser(data.user, data.token, (chat) => {
       if (chat != null) {
-        let newMessage = chat['messages'].create({
+        const newMessage = chat['messages'].create({
           user: data.user,
           message: data.message
         })
 
         chat['messages'].push(newMessage)
 
-        chat.save(err => {
+        chat.save((err) => {
           io.to(chat._id).emit('new message', newMessage)
         })
       }
